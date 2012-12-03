@@ -1,0 +1,5 @@
+= apexgen
+
+Generate this with
+    apexgen rdoc
+After you have described your command line interface
