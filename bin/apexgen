@@ -11,27 +11,27 @@ end
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'A command line app to help generate basic scaffolding for different code used on the salesforce/force.com platforms'
 
 version Apexgen::VERSION
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+# desc 'Describe some switch here'
+# switch [:s,:switch]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
+# desc 'Describe some flag here'
+# default_value 'the default'
+# arg_name 'The name of the argument'
+# flag [:f,:flagname]
 
-desc 'Describe object here'
-arg_name 'Describe arguments to object here'
+desc 'Generate objects, complete with object fields and field settings.'
+arg_name 'object_name [field...]'
 command :object do |c|
-  c.desc 'Describe a switch to object'
-  c.switch :s
+  # c.desc 'Describe a switch to object'
+  # c.switch :s
 
-  c.desc 'Describe a flag to object'
-  c.default_value 'default'
-  c.flag :f
+  # c.desc 'Describe a flag to object'
+  # c.default_value 'default'
+  # c.flag :f
   c.action do |global_options,options,args|
 
     # Your command logic here
