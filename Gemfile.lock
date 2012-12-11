@@ -36,6 +36,6 @@ PLATFORMS
 
 DEPENDENCIES
   apexgen!
-  aruba
+  aruba (~> 0.5.1)
   rake
   rdoc

@@ -34,12 +34,14 @@ command :object do |c|
   # c.flag :f
   c.action do |global_options,options,args|
 
+    help_now! "You must specify a custom object name" if args.length == 0
+
     # Your command logic here
      
     # If you have any errors, just raise them
     # raise "that command made no sense"
 
-    puts "object command ran"
+    # puts "object command ran"
   end
 end
 

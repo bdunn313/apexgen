@@ -22,6 +22,6 @@ lib/apexgen.rb
   s.executables << 'apexgen'
   s.add_development_dependency('rake')
   s.add_development_dependency('rdoc')
-  s.add_development_dependency('aruba')
+  s.add_development_dependency('aruba', '~> 0.5.1')
   s.add_runtime_dependency('gli','2.5.0')
 end
