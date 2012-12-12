@@ -8,8 +8,14 @@ Before do
   @puts = true
   @original_rubylib = ENV['RUBYLIB']
   ENV['RUBYLIB'] = LIB_DIR + File::PATH_SEPARATOR + ENV['RUBYLIB'].to_s
+  @real_pwd = ENV['PWD']
+  fake_pwd = File.join('/tmp', 'fake_pwd')
+  FileUtils.rm_rf fake_pwd, secure: true
+  Dir.mkdir fake_pwd
+  ENV['PWD'] = fake_pwd
 end
 
 After do
   ENV['RUBYLIB'] = @original_rubylib
+  ENV['PWD'] = @real_pwd
 end
