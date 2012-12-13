@@ -31,3 +31,55 @@ Feature: Object
     And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
     And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
     And the file "objects/TestObject__c.object" in my current directory should contain "<type>Text"
+
+  Scenario: Create a custom object with one field.
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:text`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Text"
+
+  Scenario: Create a custom object with one field. Type case should not matter.
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:TeXt`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Text"
+
+  Scenario: Create a custom object with a Text Area and a Text Area Long
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:TextArea AnotherField:LongTextArea`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>TextArea"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>LongTextArea"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<visibleLines>3"
+
+  Scenario: Create a custom object with a Rich Text Area and an Encrypted Text Field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:RichTextArea AnotherField:EncryptedText`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Html"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>EncryptedText"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<maskChar>asterisk"
+
+  Scenario: Create a custom object with a Url and an Auto Number Field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:Url AnotherField:AutoNumber`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Url"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>AutoNumber"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<displayFormat>{0000}"

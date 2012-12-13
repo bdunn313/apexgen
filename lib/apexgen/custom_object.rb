@@ -8,6 +8,15 @@ module Apexgen
       @fields = fields
       @name_plural = name.pluralize
       @object_name = "#{@name}__c"
+      formats = {
+        'text'          => Apexgen::Field::Text.new,
+        'encryptedtext' => Apexgen::Field::EncryptedText.new,
+        'textarea'      => Apexgen::Field::TextArea.new,
+        'longtextarea'  => Apexgen::Field::LongTextArea.new,
+        'richtextarea'  => Apexgen::Field::RichTextArea.new,
+        'url'           => Apexgen::Field::Url.new,
+        'autonumber'    => Apexgen::Field::AutoNumber.new,
+      }
 
       # Filename and path setup
       @file_name = "#{@object_name}.object"
@@ -20,6 +29,14 @@ module Apexgen
       File.open(File.join(@dir_name, @file_name), "w") do |f|
         xml = String.new
         xml << header
+        
+        @fields.each do |field|
+          name, type = field.split(':')
+          type = 'text' if type == nil
+          formatter = formats[type.downcase]
+          xml << formatter.format(name)
+        end
+        
         xml << footer
         f.write xml
       end
