@@ -83,3 +83,60 @@ Feature: Object
     And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
     And the file "objects/TestObject__c.object" in my current directory should contain "<type>AutoNumber"
     And the file "objects/TestObject__c.object" in my current directory should contain "<displayFormat>{0000}"
+
+  Scenario: Create a custom object with a Checkbox and a Currency field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:Checkbox AnotherField:Currency`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Checkbox"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<defaultValue>false"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Currency"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<precision>14"
+
+  Scenario: Create a custom object with a DateTime and a Date field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:DateTime AnotherField:Date`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>DateTime"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Date"
+
+  Scenario: Create a custom object with a Geolocation and a Number field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:Geolocation AnotherField:Number`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Location"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<displayLocationInDecimal>false"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Number"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<precision>18"
+
+  Scenario: Create a custom object with a Percent and a Phone field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:Percent AnotherField:Phone`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Percent"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<precision>18"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Phone"
+
+  Scenario: Create a custom object with an field
+    Given the file "objects/TestObject__c.object" doesn't exist in my current directory
+    When I successfully run `apexgen object TestObject SomeField:Email`
+    Then a file named "objects/TestObject__c.object" should exist in my current directory
+    And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Some_Field__c"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<label>Some Field"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<type>Email"

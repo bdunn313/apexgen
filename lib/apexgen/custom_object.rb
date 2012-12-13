@@ -16,6 +16,15 @@ module Apexgen
         'richtextarea'  => Apexgen::Field::RichTextArea.new,
         'url'           => Apexgen::Field::Url.new,
         'autonumber'    => Apexgen::Field::AutoNumber.new,
+        'checkbox'      => Apexgen::Field::Checkbox.new,
+        'currency'      => Apexgen::Field::Currency.new,
+        'datetime'      => Apexgen::Field::DateTime.new,
+        'date'          => Apexgen::Field::Date.new,
+        'email'         => Apexgen::Field::Email.new,
+        'geolocation'   => Apexgen::Field::Geolocation.new,
+        'number'   => Apexgen::Field::Number.new,
+        'percent'       => Apexgen::Field::Percent.new,
+        'phone'         => Apexgen::Field::Phone.new,
       }
 
       # Filename and path setup
