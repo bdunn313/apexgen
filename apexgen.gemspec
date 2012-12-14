@@ -3,11 +3,16 @@ require File.join([File.dirname(__FILE__),'lib','apexgen','version.rb'])
 spec = Gem::Specification.new do |s| 
   s.name = 'apexgen'
   s.version = Apexgen::VERSION
-  s.author = 'Your Name Here'
-  s.email = 'your@email.address.com'
-  s.homepage = 'http://your.website.com'
+  s.author = 'Brad Dunn'
+  s.email = 'brad@braddunn.com'
+  s.homepage = 'https://github.com/bdunn313/apexgen'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A description of your project'
+  s.summary =     %q{Apex code scaffolder for use on salesforce/force.com platforms}
+  s.description = %q{Apexgen allows you to generate object XML, 
+                     create scaffolding for triggers, classes and class methods, 
+                     as well as initialize a project. Currently, only object 
+                     XML generation is supported, however the other features described
+                     above are in active development.}
 # Add your other files here if you make them
   s.files = %w(
 bin/apexgen

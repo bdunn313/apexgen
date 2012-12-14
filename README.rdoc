@@ -1,6 +1,60 @@
-= apexgen
+= Apexgen - The missing Salesforce / Force.com Code Generator
 
-Describe your project here
+Apexgen is the missing apex code generator for salesforce/force.com developers. It will allow developers, particularly those that favor using {ant}[http://ant.apache.org/] and the {salesforce migration tool}[http://www.salesforce.com/us/developer/docs/daas/index.htm] to manage their org's projects, the ability to quickly generate custom objects, triggers, classes and class methods, as well as tests and the different subsets of classes (including bulk and web service apex classes).
+
+This project is under active development, so the current version may not have all the features described above. Here is the current list of features for this version(v.0.0.1):
+
+* Object Generation:
+  1. Will create an object directory in the current folder if one does not exist
+  2. The following code will create a force.com object manifest file named "My_Object__c.object" with a text field(default type) named "My_Text__c" and a checkbox field named "My_Checkbox__c"
+
+      apexgen object MyObject MyText MyCheckbox:Checkbox
+
+  3. Most field types are supported. Currently picklists, multiline picklists, and relationships are not supported.
+  4. Default required values will be filled in for each field. Currently there is no way to override the defaults, but this feature will be present in future versions.
+
+== Getting Started
+
+Here is a brief synopsis on how to get started with using apexgen.
+
+=== Installation
+
+Install:
+    
+    gem install apexgen
+
+=== Usage
+
+Create an object metadata document named "My Object" in an "objects" directory relative to current dir:
+
+    apexgen object MyObject MyText MyCheckbox:Checkbox MyCurrency:Currency
+
+For more help:
+
+    apexgen help
+    apexgen --help
+    apexgen help object
+
+== Contributing
+
+Here is a brief synopsis on how to start contributing to apexgen.
+
+1. Install Bundler
+    
+    gem install bundler
+
+2. Get the development dependencies
+
+    bundle install
+
+The main binary, which has much of the initial code calls, is in bin/apexgen.
+The rest of the code exists in lib/apexgen/ and all library include calls exist in lib/apexgen.rb
+Cucumber (with aruba) tests exist in features/ and all step definitions are in features/step_definitions
+Unit testing hasn't started yet on this project, but all unit tests will live in test/
+
+== License
+
+Apexgen is released under the {MIT License}[http://www.opensource.org/licenses/MIT]
 
 :include:apexgen.rdoc
 
