@@ -15,12 +15,8 @@ spec = Gem::Specification.new do |s|
                      above are in active development.}
   s.license = 'MIT'
 # Add your other files here if you make them
-  s.files = %w(
-bin/apexgen
-lib/apexgen/version.rb
-lib/apexgen.rb
-  )
-  s.require_paths << 'lib'
+  s.files = `git ls-files`.split("\n")
+  s.require_paths = ["lib"]
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.rdoc','apexgen.rdoc']
   s.rdoc_options << '--title' << 'apexgen' << '--main' << 'README.rdoc' << '-ri'
