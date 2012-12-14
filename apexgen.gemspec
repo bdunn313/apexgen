@@ -3,8 +3,8 @@ require File.join([File.dirname(__FILE__),'lib','apexgen','version.rb'])
 spec = Gem::Specification.new do |s| 
   s.name = 'apexgen'
   s.version = Apexgen::VERSION
-  s.author = 'Brad Dunn'
-  s.email = 'brad@braddunn.com'
+  s.authors = ['Brad Dunn', 'Adam J. Lincoln']
+  s.email = ['brad@braddunn.com', 'adamjlincoln@gmail.com']
   s.homepage = 'https://github.com/bdunn313/apexgen'
   s.platform = Gem::Platform::RUBY
   s.summary =     %q{Apex code scaffolder for use on salesforce/force.com platforms}
