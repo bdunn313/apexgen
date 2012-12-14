@@ -13,6 +13,7 @@ spec = Gem::Specification.new do |s|
                      as well as initialize a project. Currently, only object 
                      XML generation is supported, however the other features described
                      above are in active development.}
+  s.license = 'MIT'
 # Add your other files here if you make them
   s.files = %w(
 bin/apexgen
