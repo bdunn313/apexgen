@@ -22,7 +22,7 @@ module Apexgen
         'date'          => Apexgen::Field::Date.new,
         'email'         => Apexgen::Field::Email.new,
         'geolocation'   => Apexgen::Field::Geolocation.new,
-        'number'   => Apexgen::Field::Number.new,
+        'number'        => Apexgen::Field::Number.new,
         'percent'       => Apexgen::Field::Percent.new,
         'phone'         => Apexgen::Field::Phone.new,
       }
