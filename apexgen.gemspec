@@ -27,4 +27,5 @@ spec = Gem::Specification.new do |s|
   s.add_development_dependency('aruba', '~> 0.5.1')
   s.add_runtime_dependency('gli','2.5.0')
   s.add_runtime_dependency('active_support', '~> 3.0.0')
+  s.add_runtime_dependency('ox', '~> 1.8.0')
 end

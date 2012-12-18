@@ -4,6 +4,7 @@ PATH
     apexgen (0.0.1)
       active_support (~> 3.0.0)
       gli (= 2.5.0)
+      ox (~> 1.8.0)
 
 GEM
   remote: http://rubygems.org/
@@ -29,6 +30,7 @@ GEM
       json (>= 1.4.6)
     gli (2.5.0)
     json (1.7.5)
+    ox (1.8.1)
     rake (10.0.2)
     rdoc (3.12)
       json (~> 1.4)

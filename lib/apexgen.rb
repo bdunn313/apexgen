@@ -22,3 +22,5 @@ require 'apexgen/custom_object.rb'
   require 'apexgen/field/text.rb'
   require 'apexgen/field/text_area.rb'
   require 'apexgen/field/url.rb'
+
+require 'apexgen/object_factory.rb'
