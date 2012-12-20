@@ -37,7 +37,7 @@ class DefaultTest < Test::Unit::TestCase
 
   def test_make_node_with_no_value
     node_name = 'TestNode'
-    node = @factory.make_node node_name
+    node = @factory.make_node(node_name)
 
     assert_equal node.class.to_s, "Ox::Element", 'Should return an Ox::Element object'
     assert_equal node_name, node.value, 'Should retain node name'
@@ -48,12 +48,70 @@ class DefaultTest < Test::Unit::TestCase
   def test_make_node_with_value
     node_name = 'TestNode'
     node_value = "Test Value"
-    node = @factory.make_node node_name, node_value
+    node = @factory.make_node(node_name, node_value)
 
     assert_equal node.class.to_s, "Ox::Element", 'Should return an Ox::Element object'
     assert_equal node_name, node.value, 'Should retain node name'
     assert_empty node.attributes, 'Should not have any attributes'
     assert_equal node_value, node.nodes[0], 'Should have a value in first node position'
+  end
+
+  def test_make_nodes
+    nodes = {
+      firstNode:  'First Node Content',
+      secondNode: 'Second Node Content',
+      thirdNode:  'Third Node Content',
+      fourthNode: nil
+    }
+    doc = Ox::Document.new(version: '1.0')
+    doc << doc_root = Ox::Element.new('root')
+
+    @factory.make_nodes(nodes, doc_root)
+    doc_string = Ox.dump(doc).strip
+
+    expected = <<-END.gsub(/^ {4}/, '').chomp
+    <root>
+      <firstNode>First Node Content</firstNode>
+      <secondNode>Second Node Content</secondNode>
+      <thirdNode>Third Node Content</thirdNode>
+      <fourthNode/>
+    </root>
+    END
+    assert doc_string.instance_of?(String), "Should dump to string"
+    assert_equal expected, doc_string, "Should return correctly formatted xml as string"
+  end
+
+  def test_make_nodes_with_nested
+    nodes = {
+      firstNode:  'First Node Content',
+      secondNode: {
+        nestedOne: "First Nested Node Content",
+        nestedTwo: "Second Nested Node Content",
+        nestedThree: nil
+      },
+      thirdNode:  'Third Node Content',
+      fourthNode: nil
+    }
+    doc = Ox::Document.new(version: 1.0)
+    doc << doc_root = Ox::Element.new('root')
+
+    @factory.make_nodes(nodes, doc_root)
+    doc_string = Ox.dump(doc).strip
+
+    expected = <<-END.gsub(/^ {4}/, '').chomp
+    <root>
+      <firstNode>First Node Content</firstNode>
+      <secondNode>
+        <nestedOne>First Nested Node Content</nestedOne>
+        <nestedTwo>Second Nested Node Content</nestedTwo>
+        <nestedThree/>
+      </secondNode>
+      <thirdNode>Third Node Content</thirdNode>
+      <fourthNode/>
+    </root>
+    END
+    assert doc_string.instance_of?(String), "Should dump to string"
+    assert_equal expected, doc_string, "Should return correctly formatted xml as string"
   end
 
   def test_can_create_header
