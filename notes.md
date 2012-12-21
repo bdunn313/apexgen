@@ -11,9 +11,9 @@ Object Metadata
 - `<label>`
 - `<listViews>` **NOT NECESSARY**
 - `<nameField>`
-      <label>Dummy Object Name</label>
-      <trackHistory>false</trackHistory>
-      <type>Text</type>
+  - `<label>Dummy Object Name</label>`
+  - `<trackHistory>false</trackHistory>`
+  - `<type>Text</type>`
 - `<pluralLabel>`
 - `<sharingModule>ReadWrite</sharingModel>`
 

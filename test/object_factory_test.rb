@@ -123,4 +123,24 @@ class DefaultTest < Test::Unit::TestCase
     xml = @factory.generate
     assert xml.include?(@footer), 'Should generate correct object footer'
   end
+
+  def test_can_create_field
+    @factory.fields = ['FirstField:Number']
+    xml = @factory.generate
+    expected = <<-END.gsub(/^ {2}/, '').chomp
+    <fields>
+      <fullName>First_Field__c</fullName>
+      <description>First Field Description</description>
+      <externalId>false</externalId>
+      <required>false</required>
+      <label>Number Field</label>
+      <trackHistory>false</trackHistory>
+      <precision>18</precision>
+      <scale>2</scale>
+      <unique>false</unique>
+      <type>Number</type>
+    </fields>
+    END
+    assert xml.include?(expected), 'Should generate correct xml for field'
+  end
 end

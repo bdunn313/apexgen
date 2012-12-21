@@ -20,7 +20,9 @@ module Apexgen
     # Create the XML and return XML string
     def generate
       create_header
-      # TODO: create fields
+      unless @fields.empty?
+        @fields.each { |field| create_field(field) }
+      end
       create_footer
       @dtd << Ox.dump(@doc).strip
     end
@@ -40,11 +42,11 @@ module Apexgen
       nodes.each do |name, value|
         if value.kind_of?(Hash)
           node = Ox::Element.new(name.to_s)
-          make_nodes(value, node) # Recursively call make_nodes on child nodes, appending the results back to node
+          make_nodes(value, node)
         else
           node = make_node(name.to_s, value)
         end
-        parent_node << node # Append value back to parent node
+        parent_node << node
         parent_node
       end
     end
@@ -72,12 +74,124 @@ module Apexgen
           label: "#{@name.titleize} Name",
           displayFormat: '{0000}',
           type: 'AutoNumber',
-        },
+          },
         pluralLabel: @name.pluralize.titleize.to_s,
         searchLayouts: nil,
         sharingModel: 'ReadWrite',
       }
       make_nodes(nodes, @doc_root)
+    end
+
+    def create_field(field)
+      field_name, field_type = field.split(":")
+      nodes = get_field_nodes(field_name, field_type.downcase!)
+      make_nodes(nodes, @doc_root)
+    end
+
+    def get_field_nodes(field_name, field_type, options={})
+      base_nodes = {
+        fullName: "#{field_name.titleize.tr(" ", "_")}__c",
+        description: "#{field_name.titleize} Description",
+        externalId: false,
+        required: false,
+        label: "#{field_name.titleize}",
+        trackHistory: false,
+      }
+      nodes_by_type = {
+        'autonumber' => { 
+          displayFormat: "AUTO-{0000}",
+          type: 'AutoNumber',
+          },
+        'checkbox' => { 
+          defaultValue: nil,
+          type: 'Checkbox',
+          },
+        'currency' => {
+          precision: '14',
+          scale: '2',
+          type: 'Currency',
+          },
+        'date' => { 
+          type: 'Date',
+          },
+        'datetime' => { 
+          type: 'DateTime',
+          },
+        'email' => { 
+          unique: 'false',
+          type: 'Email',
+          },
+        'geolocation' => { 
+          displayLocationInDecimal: 'false',
+          scale: '2',
+          type: 'Location',
+          },
+        'number' => {
+          precision: '14',
+          scale: '2',
+          unique: 'false',
+          type: 'Number',
+          },
+        'percent' => {
+          precision: '14',
+          scale: '2',
+          type: 'Percent',
+          },
+        'phone' => { 
+          type: 'Phone',
+          },
+        'picklist' => {
+          picklist: {
+            picklistValues: {
+              fullName: 'Field 1',
+              default: 'false',
+              },
+            sorted: 'false',
+            },
+          type: 'Picklist',
+          },
+        'picklistmulti' => {
+          picklist: {
+            picklistValues: {
+              fullName: 'Field 1',
+              default: 'false',
+              },
+            sorted: 'false',
+            },
+          visibleLines: '4',
+          type: 'MultiselectPicklist',
+          },
+        'text' => {
+          length: '',
+          unique: 'false',
+          type: 'Text',
+          },
+        'textarea' => { 
+          type: 'TextArea',
+          },
+        'longtextarea' => {
+          length: '',
+          visibleLines: '3',
+          type: 'LongTextArea',
+          },
+        'encryptedtext' => {
+          length: '',
+          maskChar: 'asterisk',
+          maskType: 'all',
+          type: 'EncryptedText',
+          },
+        'richtextarea' => {
+          length: '',
+          visibleLines: '3',
+          type: 'Html',
+          },
+        'url' => { 
+          type: 'Url',
+          },
+      }
+      field_nodes = base_nodes.merge(nodes_by_type[field_type])
+      return_nodes = {fields: field_nodes}
+      return_nodes
     end
   end
 end
