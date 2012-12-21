@@ -133,7 +133,7 @@ class DefaultTest < Test::Unit::TestCase
       <description>First Field Description</description>
       <externalId>false</externalId>
       <required>false</required>
-      <label>Number Field</label>
+      <label>First Field</label>
       <trackHistory>false</trackHistory>
       <precision>18</precision>
       <scale>2</scale>
@@ -141,6 +141,8 @@ class DefaultTest < Test::Unit::TestCase
       <type>Number</type>
     </fields>
     END
-    assert xml.include?(expected), 'Should generate correct xml for field'
+    expected_complete = String.new
+    expected_complete << @header << "\n" << expected << "\n" << @footer
+    assert_equal expected_complete, xml, 'Should generate correct xml for field'
   end
 end

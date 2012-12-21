@@ -95,7 +95,7 @@ Feature: Object
     And the file "objects/TestObject__c.object" in my current directory should contain "<fullName>Another_Field__c"
     And the file "objects/TestObject__c.object" in my current directory should contain "<label>Another Field"
     And the file "objects/TestObject__c.object" in my current directory should contain "<type>Currency"
-    And the file "objects/TestObject__c.object" in my current directory should contain "<precision>14"
+    And the file "objects/TestObject__c.object" in my current directory should contain "<precision>18"
 
   Scenario: Create a custom object with a DateTime and a Date field
     Given the file "objects/TestObject__c.object" doesn't exist in my current directory

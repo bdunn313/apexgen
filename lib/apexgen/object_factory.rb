@@ -5,7 +5,7 @@ module Apexgen
     # Expose fields so it does not need to be set on initialization
     attr_accessor :fields
     # Initialization
-    def initialize(object_name, fields={})
+    def initialize(object_name, fields=[])
       # Setters
       @name = object_name
       @fields = fields
@@ -84,7 +84,8 @@ module Apexgen
 
     def create_field(field)
       field_name, field_type = field.split(":")
-      nodes = get_field_nodes(field_name, field_type.downcase!)
+      field_type = 'text' if field_type.nil?
+      nodes = get_field_nodes(field_name, field_type)
       make_nodes(nodes, @doc_root)
     end
 
@@ -92,10 +93,10 @@ module Apexgen
       base_nodes = {
         fullName: "#{field_name.titleize.tr(" ", "_")}__c",
         description: "#{field_name.titleize} Description",
-        externalId: false,
-        required: false,
+        externalId: 'false',
+        required: 'false',
         label: "#{field_name.titleize}",
-        trackHistory: false,
+        trackHistory: 'false',
       }
       nodes_by_type = {
         'autonumber' => { 
@@ -103,11 +104,11 @@ module Apexgen
           type: 'AutoNumber',
           },
         'checkbox' => { 
-          defaultValue: nil,
+          defaultValue: 'false',
           type: 'Checkbox',
           },
         'currency' => {
-          precision: '14',
+          precision: '18',
           scale: '2',
           type: 'Currency',
           },
@@ -127,13 +128,13 @@ module Apexgen
           type: 'Location',
           },
         'number' => {
-          precision: '14',
+          precision: '18',
           scale: '2',
           unique: 'false',
           type: 'Number',
           },
         'percent' => {
-          precision: '14',
+          precision: '18',
           scale: '2',
           type: 'Percent',
           },
@@ -189,7 +190,7 @@ module Apexgen
           type: 'Url',
           },
       }
-      field_nodes = base_nodes.merge(nodes_by_type[field_type])
+      field_nodes = base_nodes.merge(nodes_by_type[field_type.downcase])
       return_nodes = {fields: field_nodes}
       return_nodes
     end
