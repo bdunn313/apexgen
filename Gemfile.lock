@@ -5,6 +5,7 @@ PATH
       active_support (~> 3.0.0)
       gli (= 2.5.0)
       ox (~> 1.8.0)
+      tilt (~> 1.3.3)
 
 GEM
   remote: http://rubygems.org/
@@ -36,6 +37,7 @@ GEM
       json (~> 1.4)
     rspec-expectations (2.12.0)
       diff-lcs (~> 1.1.3)
+    tilt (1.3.3)
 
 PLATFORMS
   ruby
