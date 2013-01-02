@@ -1,5 +1,5 @@
 require 'ox'
-require 'active_support/inflector'
+
 module Apexgen
   class ObjectFactory
     # Expose fields so it does not need to be set on initialization
