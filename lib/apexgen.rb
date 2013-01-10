@@ -9,3 +9,4 @@ require 'active_support/inflector'
 # CustomObject Classes
 require 'apexgen/custom_object.rb'
 require 'apexgen/object_factory.rb'
+require 'apexgen/trigger.rb'
