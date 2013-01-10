@@ -1,5 +1,7 @@
 = Apexgen - The missing Salesforce / Force.com Code Generator
 
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/bdunn313/apexgen]
+
 Apexgen is the missing apex code generator for salesforce/force.com developers. It will allow developers, particularly those that favor using {ant}[http://ant.apache.org/] and the {salesforce migration tool}[http://www.salesforce.com/us/developer/docs/daas/index.htm] to manage their org's projects, the ability to quickly generate custom objects, triggers, classes and class methods, as well as tests and the different subsets of classes (including bulk and web service apex classes).
 
 This project is under active development, so the current version may not have all the features described above. Here is the current list of features for this version(v.0.0.1):
