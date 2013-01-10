@@ -3,19 +3,34 @@ require 'tilt'
 
 module Apexgen
   class Trigger
-    def initialize(name=nil, target_object=nil, trigger_events=nil)
+    attr_accessor :name, :target_object
+    attr_reader :events
+
+    def initialize(name=nil, target_object=nil, events=nil)
+      @name, @target_object = name, target_object
+      self.events = events
       @template = Tilt.new(File.dirname(__FILE__) + '/templates/trigger.erb')
     end
 
-    def parse_events(raw_params)
-      # before:insert,update,delete after:insert,update,delete,undelete
+    def events=(raw_events)
+      return raw_events if raw_events.kind_of? String
+      return nil unless raw_events.kind_of? Array
       events = []
-      raw_params.each do |param|
+      raw_events.each do |param|
         type, actions = param.split ":"
         actions = actions.split ","
         actions.each { |action| events.push "#{type} #{action.strip}" if verify_event(type, action.strip) }
       end
-      events.join ", "
+      @events = events.join ", "
+    end
+
+    def build(save_now=false)
+      @rendered_string = @template.render(self)
+      save() if save_now
+    end
+
+    def save(dir)
+      
     end
 
     private

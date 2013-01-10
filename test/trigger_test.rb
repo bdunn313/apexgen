@@ -5,11 +5,22 @@ require 'active_support/inflector'
 class DefaultTest < Test::Unit::TestCase
 
   def setup
-    
+    @name = "TestTrigger"
+    @target_object = "CustomObject"
+    @events_params = ['before:insert,update', 'after:insert,update']
+    @events_parsed = 'before insert, before update, after insert, after update'
+    @trigger = Apexgen::Trigger.new @name, @target_object, @events_params
   end
 
   def teardown
-    @trigger = nil
+    @name, @target_object, @events, @trigger = nil
+  end
+
+  def test_can_initialize
+    assert_equal "Apexgen::Trigger", @trigger.class.to_s, "Should be an instance of the correct class"
+    assert_equal @name, @trigger.name, "Should automatically set name if passed during initialization"
+    assert_equal @target_object, @trigger.target_object, "Should automatically set target_object if passed during initialization"
+    assert_equal @events_parsed, @trigger.events, "Should automatically set events if passed during initialization"
   end
 
   def test_can_parse_event_params
@@ -31,7 +42,8 @@ class DefaultTest < Test::Unit::TestCase
       test = eval(test_name)
       test_name = test_name.titleize
       input, expected = test
-      assert_equal expected, trigger.parse_events(input), "Should be able to parse #{test_name}"
+      trigger.events = input
+      assert_equal expected, trigger.events, "Should be able to parse #{test_name}"
     end
 
   end
